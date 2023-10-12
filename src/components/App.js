@@ -16,6 +16,7 @@ function App() {
 
   const AddTodo = () => {
     if ((text !== '') & (title !== '')) dispatch(addToDo({ title, text }));
+    console.log(text)
     handleClose();
     setText('');
     setTitle('');

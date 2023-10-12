@@ -40,10 +40,10 @@ function CardItem() {
   console.log(filter)
 
   const getVisibleToDo = () => {
-      if (filter === 'all' || filter ==='') {
-        return todos;
-      }
-      return todos.filter(todo => todo.isCompleted.toString() === filter);
+    if (filter === 'all' || filter === '') {
+      return todos;
+    }
+    return todos.filter(todo => todo.isCompleted.toString() === filter);
   };
 
   const filterToDo = getVisibleToDo();
@@ -66,7 +66,7 @@ function CardItem() {
       )}
 
       {filterToDo.map(({ title, id, text, isCompleted }) => (
-        <Card key={id} style={{ width: '30rem' }}>
+        <Card key={id} >
           <Card.Header as="h5">{title}</Card.Header>
           <Card.Body className={styles.card_body}>
             <div className={styles.box_info}>
@@ -76,7 +76,18 @@ function CardItem() {
                 defaultChecked={isCompleted}
                 onClick={() => dispatch(changeTodo(id))}
               />
-              <Card.Text>{text}</Card.Text>
+              
+              <Card.Text
+                className={`${styles.scrollbar} ${styles.scrollbar_primary} ${styles.tetxteria}`}
+                >
+                  {text.split(',').map(e => {
+                    return (
+                      <p style={{margin:'0'}}>{e}</p>
+                    )
+                  })}
+                </Card.Text>
+           
+             
             </div>
 
             <div>

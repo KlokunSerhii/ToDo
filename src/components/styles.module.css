@@ -5,6 +5,7 @@
   justify-content: center;
   gap: 10;
 }
+
 .container_form {
   display: flex;
   align-items: center;
@@ -13,20 +14,46 @@
   margin-top: 50px;
   margin-bottom: 30px;
 }
+
 .container_card {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   gap: 10px;
+  margin-bottom: 30px;
 }
+
 .box_info {
   display: flex;
   gap: 10px;
   align-items: center;
 }
+
 .card_body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.tetxteria {
+  width: 250px;
+  border: none;
+  padding: 10px;
+}
+
+
+.scrollbar {
+  overflow-y: scroll;
+}
+
+.scrollbar_primary::-webkit-scrollbar {
+  
+  width: 2px;
+  height: 30%;
+  background-color: transparent;
+}
+
+.scrollbar_primary::-webkit-scrollbar-thumb {
+  background-color: black;
 }

@@ -11,6 +11,8 @@ function ModalTodo({
   setTitle,
   title,
 }) {
+
+
   const handleEscape = (event) => {
     if (event.key === "Escape") {
       handleClose();
@@ -52,6 +54,8 @@ function ModalTodo({
           name="title"
         />
         <Form.Control
+          as="textarea"
+          rows={8}
           type="text"
           placeholder="Description"
           onChange={(e) => setText(e.target.value)}
