@@ -5,12 +5,7 @@ const filterSlice = createSlice({
   initialState: { filter: "" },
   reducers: {
     changeFilter(state, { payload }) {
-      console.log(payload);
       state.filter = payload;
-      // if (payload === "all") {
-      //   return state;
-      // }
-      // state = state.filter((el) => el.isCompleted === !!payload);
     },
   },
 });

@@ -40,7 +40,6 @@ function CardItem() {
 
   const filterToDo = getVisibleToDo();
 
-  console.log(filter);
   return (
     <>
       {show && (

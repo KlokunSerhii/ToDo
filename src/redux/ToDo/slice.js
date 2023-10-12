@@ -42,13 +42,6 @@ const todoSlice = createSlice({
         state[indexToEdit] = updatedTodo;
       }
     },
-
-    filterTodo: (state, { payload }) => {
-      if (payload === "all") {
-        return state;
-      }
-      state = state.filter((el) => el.isCompleted === !!payload);
-    },
   },
 });
 
