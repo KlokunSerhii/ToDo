@@ -2,7 +2,7 @@ export const initialState = [
   {
     id: '1',
     title: 'Купити продукти',
-    text: 'Молокоб хліб',
+    text: 'Молоко, хліб',
     isCompleted: true,
   },
   {
