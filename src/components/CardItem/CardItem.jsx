@@ -80,11 +80,7 @@ function CardItem() {
               <Card.Text
                 className={`${styles.scrollbar} ${styles.scrollbar_primary} ${styles.tetxteria}`}
                 >
-                  {text.split(',').map(e => {
-                    return (
-                      <p style={{margin:'0'}}>{e}</p>
-                    )
-                  })}
+                  {text}
                 </Card.Text>
            
              
