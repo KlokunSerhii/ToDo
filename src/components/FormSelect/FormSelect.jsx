@@ -10,7 +10,6 @@ function FormSelect() {
       aria-label="All"
       onChange={e => dispatch(changeFilter(e.target.value))}
     >
-      <option>Open menu</option>
       <option value="all">All</option>
       <option value="true">Completed</option>
       <option value="false">No Completed</option>

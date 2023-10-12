@@ -37,12 +37,13 @@ function CardItem() {
     setIdTodo(id);
     handleShow();
   };
+  console.log(filter)
 
   const getVisibleToDo = () => {
-    if (filter === 'all') {
-      return todos;
-    }
-    return todos.filter(todo => todo.isCompleted.toString() === filter);
+      if (filter === 'all' || filter ==='') {
+        return todos;
+      }
+      return todos.filter(todo => todo.isCompleted.toString() === filter);
   };
 
   const filterToDo = getVisibleToDo();
