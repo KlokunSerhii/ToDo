@@ -1,41 +1,48 @@
-import { Button, Form } from "react-bootstrap";
-import Card from "react-bootstrap/Card";
-import ModalEdit from "../ModalEdit";
-import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { changeTodo, deleteToDo } from "../../redux/ToDo/slice";
+import { Button, Form } from 'react-bootstrap';
+import Card from 'react-bootstrap/Card';
+import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { changeTodo, deleteToDo, editTodo } from '../../redux/ToDo/slice';
+import ModalTodo from '../Modal/ModalTodo';
+import styles from '../styles.module.css';
 
 function CardItem() {
   const dispatch = useDispatch();
-  const todos = useSelector((state) => state.todos);
-  const filter = useSelector((state) => state.filter.filter);
+  const todos = useSelector(state => state.todos);
+  const filter = useSelector(state => state.filter.filter);
   const [show, setShow] = useState(false);
   const [idTodo, setIdTodo] = useState(false);
-  const handleClose = () => setShow(false);
+  const [title, setTitle] = useState('');
+  const [text, setText] = useState('');
+
   const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
 
-  const deleteTodo = (id) => {
-    dispatch(deleteToDo(id));
+  const handleEditTodo = () => {
+    if ((text !== '') & (title !== '')) {
+      const newTask = {
+        title,
+        text,
+        isCompleted: false,
+        id: idTodo,
+      };
+      dispatch(editTodo(newTask));
+      handleClose();
+      setText('');
+      setTitle('');
+    }
   };
 
-  const handleChangeTodo = (id) => {
-    dispatch(changeTodo(id));
-  };
-
-  const hanEditTodo = (id) => {
+  const hanEditTodo = id => {
     setIdTodo(id);
     handleShow();
   };
 
   const getVisibleToDo = () => {
-    if (!todos) {
-      return;
-    } else if (filter === "all") {
+    if (filter === 'all') {
       return todos;
     }
-    return todos.filter(
-      (todo) => todo.isCompleted.toString() === filter
-    );
+    return todos.filter(todo => todo.isCompleted.toString() === filter);
   };
 
   const filterToDo = getVisibleToDo();
@@ -43,34 +50,30 @@ function CardItem() {
   return (
     <>
       {show && (
-        <ModalEdit
+        <ModalTodo
           handleClose={handleClose}
           show={show}
-          idTodo={idTodo}
+          setTitle={setTitle}
+          setText={setText}
+          title="Edit ToDo"
+          children={
+            <Button variant="primary" onClick={handleEditTodo}>
+              Edit ToDo
+            </Button>
+          }
         />
       )}
+
       {filterToDo.map(({ title, id, text, isCompleted }) => (
-        <Card key={id} style={{ width: "30rem" }}>
+        <Card key={id} style={{ width: '30rem' }}>
           <Card.Header as="h5">{title}</Card.Header>
-          <Card.Body
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                gap: "10px",
-                alignItems: "center",
-              }}
-            >
+          <Card.Body className={styles.card_body}>
+            <div className={styles.box_info}>
               <Form.Check
                 aria-label="option 1"
                 type="checkbox"
                 defaultChecked={isCompleted}
-                onClick={() => handleChangeTodo(id)}
+                onClick={() => dispatch(changeTodo(id))}
               />
               <Card.Text>{text}</Card.Text>
             </div>
@@ -80,7 +83,7 @@ function CardItem() {
                 variant="warning"
                 size="sm"
                 type="button"
-                style={{ margin: "5px" }}
+                style={{ margin: '5px' }}
                 onClick={() => hanEditTodo(id)}
               >
                 Edit
@@ -89,8 +92,8 @@ function CardItem() {
                 variant="danger"
                 size="sm"
                 type="button"
-                style={{ margin: "5px" }}
-                onClick={() => deleteTodo(id)}
+                style={{ margin: '5px' }}
+                onClick={() => dispatch(deleteToDo(id))}
               >
                 Delete
               </Button>

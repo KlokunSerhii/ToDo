@@ -1,30 +1,47 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { useState } from "react";
 import { Form } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { addToDo } from "../../redux/ToDo/slice";
+import { useEffect } from "react";
 
-function ModalTodo({ handleClose, show }) {
-  const dispatch = useDispatch();
-  const [title, setTitle] = useState("");
-  const [text, setText] = useState("");
-
-  const AddTodo = () => {
-    dispatch(addToDo({ title, text }));
-    handleClose();
+function ModalTodo({
+  handleClose,
+  show,
+  children,
+  setText,
+  setTitle,
+  title,
+}) {
+  const handleEscape = (event) => {
+    if (event.key === "Escape") {
+      handleClose();
+    }
   };
 
+  const handleBackdrop = (e) => {
+    if (e.target === e.currentTarget) {
+      handleClose();
+    }
+  };
+
+  useEffect(() => {
+    if (show) {
+      return window.addEventListener("keydown", handleEscape);
+    }
+    return () => {
+      window.removeEventListener("keydown", handleEscape);
+    };
+  });
   return (
     <Modal
       show={show}
       onHide={handleClose}
-      backdrop="static"
+      backdrop="true"
       keyboard={false}
       data-bs-theme="dark"
+      onClick={(e) => handleBackdrop(e)}
     >
       <Modal.Header closeButton>
-        <Modal.Title>Add ToDo</Modal.Title>
+        <Modal.Title>{title}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form.Control
@@ -45,9 +62,7 @@ function ModalTodo({ handleClose, show }) {
         <Button variant="secondary" onClick={handleClose}>
           Close
         </Button>
-        <Button variant="primary" onClick={() => AddTodo()}>
-          Add todo
-        </Button>
+        {children}
       </Modal.Footer>
     </Modal>
   );

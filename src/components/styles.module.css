@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10;
+}
+.container_form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+.container_card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+}
+.box_info {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.card_body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
