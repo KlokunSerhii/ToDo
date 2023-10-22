@@ -37,18 +37,16 @@
 }
 
 .tetxteria {
-  width: 250px;
+  min-width: 150px;
   border: none;
   padding: 10px;
 }
-
 
 .scrollbar {
   overflow-y: scroll;
 }
 
 .scrollbar_primary::-webkit-scrollbar {
-  
   width: 2px;
   height: 30%;
   background-color: transparent;

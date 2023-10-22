@@ -2,7 +2,7 @@ import Form from 'react-bootstrap/Form';
 import { useDispatch } from 'react-redux';
 import { changeFilter } from '../../redux/filterSlice/filterSlice';
 
-function FormSelect() {
+function StatusSelect() {
   const dispatch = useDispatch();
 
   return (
@@ -16,4 +16,4 @@ function FormSelect() {
     </Form.Select>
   );
 }
-export default FormSelect;
+export default StatusSelect;

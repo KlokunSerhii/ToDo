@@ -1,8 +1,7 @@
-import { Button, Form } from 'react-bootstrap';
-import Card from 'react-bootstrap/Card';
+import { Button, Form, Card } from 'react-bootstrap';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { changeTodo, deleteToDo, editTodo } from '../../redux/ToDo/slice';
+import { completeTodo, deleteToDo, editTodo } from '../../redux/ToDo/slice';
 import ModalTodo from '../Modal/ModalTodo';
 import styles from '../styles.module.css';
 
@@ -19,7 +18,7 @@ function CardItem() {
   const handleClose = () => setShow(false);
 
   const handleEditTodo = () => {
-    if ((text !== '') & (title !== '')) {
+    if (text !== '' && title !== '') {
       const newTask = {
         title,
         text,
@@ -37,7 +36,7 @@ function CardItem() {
     setIdTodo(id);
     handleShow();
   };
-  console.log(filter)
+  console.log(filter);
 
   const getVisibleToDo = () => {
     if (filter === 'all' || filter === '') {
@@ -50,23 +49,21 @@ function CardItem() {
 
   return (
     <>
-      {show && (
-        <ModalTodo
-          handleClose={handleClose}
-          show={show}
-          setTitle={setTitle}
-          setText={setText}
-          title="Edit ToDo"
-          children={
-            <Button variant="primary" onClick={handleEditTodo}>
-              Edit ToDo
-            </Button>
-          }
-        />
-      )}
+      <ModalTodo
+        handleClose={handleClose}
+        show={show}
+        setTitle={setTitle}
+        setText={setText}
+        title="Edit ToDo"
+        children={
+          <Button variant="primary" onClick={handleEditTodo}>
+            Edit ToDo
+          </Button>
+        }
+      />
 
       {filterToDo.map(({ title, id, text, isCompleted }) => (
-        <Card key={id} >
+        <Card key={id} className="my-3">
           <Card.Header as="h5">{title}</Card.Header>
           <Card.Body className={styles.card_body}>
             <div className={styles.box_info}>
@@ -74,16 +71,14 @@ function CardItem() {
                 aria-label="option 1"
                 type="checkbox"
                 defaultChecked={isCompleted}
-                onClick={() => dispatch(changeTodo(id))}
+                onClick={() => dispatch(completeTodo(id))}
               />
-              
+
               <Card.Text
                 className={`${styles.scrollbar} ${styles.scrollbar_primary} ${styles.tetxteria}`}
-                >
-                  {text}
-                </Card.Text>
-           
-             
+              >
+                {text}
+              </Card.Text>
             </div>
 
             <div>

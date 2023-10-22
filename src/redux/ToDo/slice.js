@@ -20,10 +20,9 @@ const todoSlice = createSlice({
       state.splice(index, 1);
     },
 
-    changeTodo: (state, { payload }) => {
-      const todoIdToChange = payload;
+    completeTodo: (state, { payload: todoId }) => {
       return state.map(todo => {
-        if (todo.id === todoIdToChange) {
+        if (todo.id === todoId) {
           return { ...todo, isCompleted: !todo.isCompleted };
         }
         return todo;
@@ -44,6 +43,6 @@ const todoSlice = createSlice({
   },
 });
 
-export const { addToDo, deleteToDo, changeTodo, editTodo, filterTodo } =
+export const { addToDo, deleteToDo, completeTodo, editTodo, filterTodo } =
   todoSlice.actions;
 export default todoSlice.reducer;
